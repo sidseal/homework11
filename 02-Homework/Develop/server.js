@@ -5,7 +5,7 @@ const express = require("express");
 const app = express();
 
 //Port
-const PORT = process.env.PORT || 8080;
+const PORT = 8080;
 
 //Express to data parse to JSON
 app.use(express.urlencoded({ extended: true }));
