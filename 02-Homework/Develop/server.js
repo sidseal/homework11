@@ -5,7 +5,7 @@ const express = require("express");
 const app = express();
 
 //Port
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 //Express to data parse to JSON
 app.use(express.urlencoded({ extended: true }));
@@ -15,7 +15,7 @@ app.use(express.json());
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
-// LISTENER
+// Listener
 app.listen(PORT, function() {
   console.log("App listening on PORT: " + PORT);
 });
