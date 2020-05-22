@@ -9,10 +9,12 @@ var activeNote = {};
 
 // A function for getting all notes from the db
 var getNotes = function() {
-  return $.ajax({
+  const allNotes= $.ajax({
     url: "/api/notes",
     method: "GET"
   });
+  console.log(allNotes)
+  return allNotes
 };
 
 // A function for saving a note to the db
@@ -50,16 +52,20 @@ var renderActiveNote = function() {
 };
 
 // Get the note data from the inputs, save it to the db and update the view
-var handleNoteSave = function() {
+var handleNoteSave = async function() {
   var newNote = {
     title: $noteTitle.val(),
     text: $noteText.val()
   };
 
-  saveNote(newNote).then(function(data) {
+  console.log(" we are in here?")
+  console.log(saveNote(newNote))
+  let data=saveNote(newNote)
+  
+    console.log("are we in here?", data)
     getAndRenderNotes();
     renderActiveNote();
-  });
+  
 };
 
 // Delete the clicked note
@@ -75,10 +81,10 @@ var handleNoteDelete = function(event) {
     activeNote = {};
   }
 
-  deleteNote(note.id).then(function() {
+  const data= deleteNote(note.id)
     getAndRenderNotes();
     renderActiveNote();
-  });
+  
 };
 
 // Sets the activeNote and displays it
@@ -128,6 +134,7 @@ var renderNoteList = function(notes) {
 // Gets notes from the db and renders them to the sidebar
 var getAndRenderNotes = function() {
   return getNotes().then(function(data) {
+    console.log(data)
     renderNoteList(data);
   });
 };
