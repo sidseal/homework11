@@ -13,14 +13,15 @@ module.exports = function (app) {
 
     app.get("/api/notes", function (req, res) {
         fs.readFile("db/db.json", "utf8", function (err, data) {
-            if (err) throw err;
-            return res.json(JSON.parse(data));
+            // if (err) throw err;
+            console.log(data)
+             res.json(JSON.parse(data));
         })
     })
 
     app.post("/api/notes", function (req, res) {
         fs.readFile("db/db.json", "utf8", function (err, data) {
-            if (err) throw err;
+            // if (err) throw err;
             const array = JSON.parse(data)
             const newNote = {
                 title: req.body.title,
@@ -29,10 +30,11 @@ module.exports = function (app) {
             };
             array.push(newNote)
             //console.log(newNote.id);
-            fs.writeFile("db/db.json", JSON.stringify(array), function (err2, data2) {
+            fs.writeFile("db/db.json", JSON.stringify(array), function (err2) {
                 if (err2) throw err2;
-                res.json(JSON.stringify(data2));
             });
+                res.json(newNote);
+           
         })
 
     })
