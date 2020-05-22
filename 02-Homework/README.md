@@ -2,9 +2,7 @@
  [![License: ISC](https://img.shields.io/badge/License-ISC-yellow.svg)](https://opensource.org/licenses/ISC)
  
 # Local Host Note Taker
-This app can be initialized on your command line by using the following command:
 
-```node index.js```
 
 # Description:
 ```This app is a note taking app that will work on the user's local host. It gives the user the ability to post add a note to a list of previously entered notes(if exiting) or starts a new list of notes. It also gives the uesr the ability to delete any of the notes.```
