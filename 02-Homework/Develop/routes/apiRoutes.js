@@ -39,7 +39,7 @@ module.exports = function (app) {
            
         })
 
-    }
+    
 
     app.delete("/api/notes/:id", function(req, res) {
 
@@ -50,15 +50,16 @@ module.exports = function (app) {
           const array = notes;
           console.log(array);
           const newDataArray = array.filter(note => {
-            return note.id == req.params.id;
+            return note.id !== req.params.id;
           })
-    
+          res.json(notes)
           fs.writeFile("db/db.json", JSON.stringify(newDataArray), function(err){
             if(err)throw err;
             
             console.log("Your note was deleted")
           })
         });
+    }
         // res.end();
       
     
