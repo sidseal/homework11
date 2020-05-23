@@ -6,7 +6,7 @@ const shortid = require('shortid');
 //Express
 const app = express();
 
-const notes = [];
+let notes = [];
 
 // Routing
 module.exports = function (app) {
@@ -16,7 +16,7 @@ module.exports = function (app) {
             if (err) throw err;
             // console.log(data)
              res.json(JSON.parse(data));
-            //  notes = JSON.parse(data)
+            notes = JSON.parse(data)
         })
     })
 
@@ -27,7 +27,7 @@ module.exports = function (app) {
             const newNote = {
                 title: req.body.title,
                 text: req.body.text,
-                id: shortid.generate(),
+                id: shortid.generate().toString(),
             };
             notes.push(newNote)
             res.json(notes)
@@ -43,10 +43,12 @@ module.exports = function (app) {
 
     app.delete("/api/notes/:id", function(req, res) {
 
-        fs.readFile("db/db.json", "utf8", function(err, data){
-          if(err)throw err;
+        // fs.readFile("db/db.json", "utf8", function(err, data){
+        //   if(err)throw err;
+        console.log(req.params.id)
     
-          const array = JSON.parse(data);
+          const array = notes;
+          console.log(array);
           const newDataArray = array.filter(note => {
             return note.id == req.params.id;
           })
@@ -57,8 +59,8 @@ module.exports = function (app) {
             console.log("Your note was deleted")
           })
         });
-        res.end();
-      });
+        // res.end();
+      
     
     // app.delete('/api/notes/:id', function (req, res) {
     //     const deleteID = req.params.id
